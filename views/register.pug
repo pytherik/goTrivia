@@ -1,0 +1,25 @@
+extends layouts/logLayout 
+
+block content 
+ 
+ .log-container
+    h1.logTitle Registratur
+    .form-container 
+      form(action="/register", method="POST")
+        .inputField
+          .errMsg
+            span.formErr #{nameErr}
+          input(type="text", id="username", name="username", placeholder="dein Triv-Name", value=username, required)
+        .inputField
+          .errMsg
+            span.formErr #{emailErr}
+          input(type="email", id="email", name="email", placeholder="E-Mail", value=email, required)
+        .inputField
+          .errMsg
+            span.formErr #{passErr}
+          input(type="password", id="pass1", name="pass1", placeholder="Passwort", required)
+        .inputField
+          input(type="password", id="pass2", name="pass2", placeholder="Bestätigen", required)
+        .inputField
+          button.button.btn-green(type="submit") Registrieren
+      a.logToggle(href="/login") Ich bin schon registriert! 

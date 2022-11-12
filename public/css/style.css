@@ -1,0 +1,18 @@
+:root {
+  	--mainBg: #aaa;
+	  --mainFont: #e9dbd5;
+  }
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+  body {
+  background-color: var(--mainBg);
+  color: var(--mainFont);
+	font-size: 1rem;
+}
+
+
