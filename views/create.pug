@@ -5,7 +5,8 @@ block content
     span.chose-form(id="multiple") Multiple 
     span.chose-form(id="single") Wahr oder falsch? 
   .form-container.multiple(hidden) 
-    form.create-form(action="/quest/multiple", method="POST")
+    form.create-form(action="/quest", method="POST")
+      input(type="hidden", name="multiple" value="true")
       .inputField 
         input(type="text", id="cat", name="category",  
               placeholder="Kategorie", required)
@@ -25,9 +26,9 @@ block content
         input(type="text", id="wrong3", name="wrong3",  
               placeholder="3. falsche (optional)", autocomplete="off")
       .inputField 
-        button.button.btn-green(type="submit") Frage anlegen
+        button.button.btn-green(type="submit") hinzu
   .form-container.trueFalse(hidden)
-    form.create-form(action="/quest/trueFalse", method="POST")
+    form.create-form(action="/quest", method="POST")
       .inputField 
         input(type="text", id="category", name="category",
               placeholder="Kategorie", required)
@@ -36,9 +37,9 @@ block content
               placeholder="Deine Behauptung", required, autocomplete="off")
       .inputField 
         label(for="right") Richtig 
-        input(type="radio", name="right", id="right", value="true", checked)
+        input(type="radio", name="right", id="right", value="true")
         br
         label(for="wrong") Falsch 
         input(type="radio", name="wrong", id="wrong", value="false") 
       .inputField 
-        button.button.btn-green(type="submit") Frage anlegen
+        button.button.btn-green(type="submit") hinzu
