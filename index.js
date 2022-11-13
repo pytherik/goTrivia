@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const session = require('express-session');
+const Quest = require('./models/questSchema');
 const mongoose = require('./connectDB');
 // const pug = require('pug');
 
@@ -41,17 +42,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set(path.join(__dirname, './views'));
 app.set('view engine', 'pug');
 
-app.get('/', middleware.redirectLogin, (req, res, next) => {
-	res.render('index', {title: `Hallo ${req.session.user.username}`});
-});
-
 const loginRouter = require('./routes/loginRoutes');
 const registerRouter = require('./routes/registerRoutes');
 const logoutRouter = require('./routes/logoutRoute');
+const questRouter = require('./routes/questRoutes');
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
+app.use('/quest', questRouter);
+
+
+app.get('/', middleware.redirectLogin, async(req, res, next) => {
+  const payload = {
+    title: req.session.user.username
+  }
+  const questions = await Quest.find({});
+  if (questions.length == 0) {
+    payload.message = 'Es gibt noch nichts zu raten!';
+    return res.render('create');
+  }
+
+  // console.log(questions);
+	return res.redirect('/quest');
+});
 
 app.listen(PORT, () => console.log('Listening on Port:', PORT));
 

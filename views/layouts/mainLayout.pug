@@ -8,9 +8,22 @@ html(lang="de")
 		link(href="images/icons/favicon/favicon.ico", rel="icon")
 		title Go Trivia
 	body
-		a(href="/logout") logout
-		block content
-	
+		.menu-modal
+			.inner-modal
+				ul.nav-ul
+					li.nav-li: a(href="#") Startseite  
+					li.nav-li: a(href="/card") Neue_Karte
+					li.nav-li: a(href="#") Profil  
+					li.nav-li.back: a(href="#") Zurück  
+		nav.navbar
+			img.menu(src="/images/icons/menu.png", alt="") 
+			img.menu.back(src="/images/icons/close.png", alt="", hidden) 
+			h1.navTitle Pampel Pursuit
+			a(href="/logout"): img.logout(src="/images/icons/logout2.png", alt="logout")
+		.layout-container
+			block content
+			.footer 
+				span.footer copyright &copy 2022
 		
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
 		script(src="/js/app.js")

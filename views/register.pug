@@ -2,8 +2,8 @@ extends layouts/logLayout
 
 block content 
  
- .log-container
-    h1.logTitle Registratur
+ .log-container.register
+    h1.logTitle Anmeldung
     .form-container 
       form(action="/register", method="POST")
         .inputField
@@ -21,5 +21,5 @@ block content
         .inputField
           input(type="password", id="pass2", name="pass2", placeholder="Bestätigen", required)
         .inputField
-          button.button.btn-green(type="submit") Registrieren
+          button.button.btn-green(type="submit") goTriv
       a.logToggle(href="/login") Ich bin schon registriert! 

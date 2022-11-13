@@ -3,17 +3,20 @@ extends layouts/logLayout
 block content 
 
   .log-container
-  h1.logTitle Login
-  .form-container 
-    form(action="/login", method="POST")
-      .inputField
-        .errMsg
-          span.formErr #{nameErr}
-        input(type="text", id="username", name="username", placeholder="Triv-Name oder Email", value=username, required)
-      .inputField
-        .errMsg
-          span.formErr #{passErr}
-        input(type="password", id="password", name="password", placeholder="Passwort", required)
-      .inputField
-        button.button.btn-green(type="submit") Login
-    a.logToggle(href="/register") Ich hab noch keinen Account! 
+    h1.logTitle Login
+    .form-container 
+      form(action="/login", method="POST")
+        .inputField
+          .errMsg
+            span.formErr #{nameErr}
+          input(type="text", id="username", name="username", 
+                placeholder="Triv-Name oder Email", 
+                value=username, required, autocomplete="off")
+        .inputField
+          .errMsg
+            span.formErr #{passErr}
+          input(type="password", id="password", name="password", 
+                placeholder="Passwort", required)
+        .inputField
+          button.button.btn-green(type="submit") Login
+      a.logToggle(href="/register") Ich hab noch keinen Account! 
