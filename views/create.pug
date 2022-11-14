@@ -37,10 +37,10 @@ block content
         input(type="text", id="statement", name="statement",
               placeholder="Deine Behauptung", required, autocomplete="off")
       .inputField 
-        label(for="right") Richtig 
-        input(type="radio", name="right", id="right", value="true")
-        br
-        label(for="wrong") Falsch 
-        input(type="radio", name="wrong", id="wrong", value="false") 
+        .tf-radio
+          label(for="right") Richtig 
+          input(type="radio", name="right", id="right", value="true")
+          label(for="wrong") Falsch 
+          input(type="radio", name="wrong", id="wrong", value="false") 
       .inputField 
         button.button.btn-green(type="submit") hinzu
