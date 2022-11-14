@@ -26,7 +26,6 @@ router.get('/create', (req, res) => {
 
 router.post('/', async (req, res) => {
   const quest = req.body;
-  console.log(req.session.user)
   const payload = { author: req.session.user._id }
   if (quest.multiple) {
     payload.isMultiple = true;
@@ -34,11 +33,7 @@ router.post('/', async (req, res) => {
       payload.category = quest.category;
       payload.question = quest.question;
       payload.right_answer = quest.answer;
-      if (quest.wrong3) {
-        payload.wrong_answers = [ quest.wrong1, quest.wrong2, quest.wrong3 ]
-      } else {
-        payload.wrong_answers = [ quest.wrong1, quest.wrong2 ]
-      }
+      payload.wrong_answers = [ quest.wrong1, quest.wrong2, quest.wrong3 ]
       console.log(payload);
       Quest.create(payload);
       return res.redirect('/');

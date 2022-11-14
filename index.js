@@ -46,11 +46,13 @@ const loginRouter = require('./routes/loginRoutes');
 const registerRouter = require('./routes/registerRoutes');
 const logoutRouter = require('./routes/logoutRoute');
 const questRouter = require('./routes/questRoutes');
+const questsApiRouter = require('./routes/api/quests');
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/quest', questRouter);
+app.use('/api/quests', questsApiRouter);
 
 
 app.get('/', middleware.redirectLogin, async(req, res, next) => {
@@ -62,9 +64,9 @@ app.get('/', middleware.redirectLogin, async(req, res, next) => {
     payload.message = 'Es gibt noch nichts zu raten!';
     return res.render('create');
   }
-
+  res.render('index');
   // console.log(questions);
-	return res.redirect('/quest');
+	// return res.redirect('/quest');
 });
 
 app.listen(PORT, () => console.log('Listening on Port:', PORT));

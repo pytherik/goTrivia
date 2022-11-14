@@ -2,8 +2,9 @@ extends layouts/mainLayout
 
 block content
   .pre-choice
-    span.chose-form(id="multiple") Multiple 
-    span.chose-form(id="single") Wahr oder falsch? 
+    h2#newQuest Erstelle eine neue Frage!
+    span.chose-form#multiple Multiple choice
+    span.chose-form#single Wahr oder falsch? 
   .form-container.multiple(hidden) 
     form.create-form(action="/quest", method="POST")
       input(type="hidden", name="multiple" value="true")
@@ -24,7 +25,7 @@ block content
               placeholder="2. falsche", required, autocomplete="off")
       .inputField 
         input(type="text", id="wrong3", name="wrong3",  
-              placeholder="3. falsche (optional)", autocomplete="off")
+              placeholder="3. falsche", required, autocomplete="off")
       .inputField 
         button.button.btn-green(type="submit") hinzu
   .form-container.trueFalse(hidden)
