@@ -29,6 +29,9 @@ function shuffleArray(arr) {
 $("#new-quest").click(() => {
   // $(".answer").css("backgroundColor", "#444");
   // $(".answer").removeClass("okay");
+  $("#answer1").show();
+  $("#answer3").show();
+
   $(".answer").removeClass("okay yes no");
   $.get("/api/quests", quest => {
     if (quest.isMultiple) {
@@ -59,8 +62,25 @@ $("#new-quest").click(() => {
       })
 
     } else {
-      $(".quest-container").html(`<h1>${quest.question}</h1>
-      <p>Richtig oder Falsch?</p>`)
+      $("#answer1").hide();
+      $("#answer3").hide();
+      $(".question").html(`<h1>${quest.question}</h1>`)
+      $("#answer0").text("Richtig").click(() => {
+        if (quest.isTrue == true) {
+          $("#answer0").addClass("yes")
+        } else {
+          $("#answer0").addClass("no")
+          $("#answer2").addClass("yes")
+        }
+      });
+      $("#answer2").text("Falsch").click(() => {
+        if (quest.isTrue == false) {
+          $("#answer2").addClass("yes")
+        } else {
+          $("#answer0").addClass("no")
+          $("#answer2").addClass("yes")
+        }
+      });
     }
   })
 })
