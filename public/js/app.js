@@ -27,16 +27,44 @@ function shuffleArray(arr) {
   return arr;
 }
 $("#new-quest").click(() => {
+  // $(".answer").css("backgroundColor", "#444");
+  // $(".answer").removeClass("okay");
+  $(".answer").removeClass("okay yes no");
   $.get("/api/quests", quest => {
     if (quest.isMultiple) {
       let answers = quest.wrong_answers;
       answers.push(quest.right_answer);
       answers = shuffleArray(answers);
-      $(".quest-container").html(`<h1>${quest.question}</h1>
-    <p>${answers}<p>`)
+      console.log(answers);
+      $(".question").html(`<h1>${quest.question}</h1>`)
+      answers.forEach((answer, i) => {
+        $("#answer" + i).text(answer);
+        if (answer == quest.right_answer) {
+          $("#answer" + i).addClass("okay")        }
+        $("#answer" + i).click((e) => {
+          const guess = e.target.innerHTML;
+          if (guess == quest.right_answer) {
+            $("#answer" + i).addClass("yes");
+            // $("#answer" + i).css("backgroundColor", "green");
+            console.log("Richtig");
+          }
+          else {
+            $("#answer" + i).addClass("no");
+            // $("#answer" + i).css("backgroundColor", "red");
+            $(".okay").addClass("yes");
+            // $(".okay").css("backgroundColor", "green");
+            console.log("Falsch");
+          }
+        })
+      })
+
     } else {
       $(".quest-container").html(`<h1>${quest.question}</h1>
       <p>Richtig oder Falsch?</p>`)
     }
   })
 })
+
+function checkVal(val) {
+  console.log(val);
+}
