@@ -13,6 +13,8 @@
 
   body {
   background-color: var(--mainBg);
+	background-image: url('../images/bg1-blur.jpg');
+	background-size: cover;
   color: var(--mainFont);
 	font-size: 1rem;
 	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
@@ -48,10 +50,15 @@
 .menu {
 	z-index: 10;
 }
+
 .log-container {
-	margin-top: 20vh;
+	text-align: center;
+	margin-top: 17vh;
 }
 
+.form-container {
+	text-align: center;
+}
 .register {
 	margin-top: 10vh;
 }
@@ -84,7 +91,7 @@ input[type="password"] {
 
 .question {
 	width: 100%;
-	background-color: #444;
+	background-color: #444444aa;
 	border: 1px solid #333;
 	border-radius: 1rem;
 	padding: 1rem 0; 
@@ -106,7 +113,7 @@ input[type="password"] {
 }
 
 .answer {
-	background-color: #444;
+	background-color: #444444aa;
 	margin: 2rem 0;
 	padding: 1.2rem 0;
 	border: 1px solid #333;
@@ -124,28 +131,30 @@ input[type="password"] {
 }
 
 .no {
+	background-color: #ff0000aa;
 	animation: toRed 2s;
 }
 
 .yes {
+	background-color: #00ff00aa;
 	animation: toGreen 2s;
 }
 
 @keyframes toGreen {
 	from {
-		background-color: #444;
+		background-color: #444444aa;
 	} to 
 	{
-		background-color: green;
+		background-color: #00ff00aa;
 	}
 }
 
 @keyframes toRed {
 	from {
-		background-color: #444;
+		background-color: #444444aa;
 	} to 
 	{
-		background-color: red;
+		background-color: #ff0000aa;
 	}
 }
 
@@ -155,10 +164,10 @@ input[type="password"] {
 	font-size: 2rem;
 	color: lightgreen;
 	font-weight: bold;
-	padding: .5rem 1rem;
-	border-bottom: 1px solid #555;
-	border-top-right-radius: 3rem;
-	border-top-left-radius: 3rem;
+	padding: 1.5rem 3rem;
+	border-bottom: 1px solid #55555555;
+	border-top-right-radius: 5rem;
+	border-top-left-radius: 5rem;
 	background-image: linear-gradient( #d46a6a, #801515, #aa3939);
 	box-shadow: 0 5px 10px black;
 	cursor: pointer;
@@ -171,6 +180,7 @@ input[type="password"] {
 
 .logToggle {
 	text-decoration: none;
+	text-align: center;
 	font-size: 1.5rem;
 	color: lightblue;
 }
