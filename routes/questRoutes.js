@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     payload.wrong_answers = [ quest.wrong1, quest.wrong2, quest.wrong3 ]
     console.log(payload);
     Quest.create(payload);
-    return res.redirect('/');
+    return res.redirect('/quest/create');
   }
 })
 

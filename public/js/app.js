@@ -10,17 +10,6 @@ $(".back").click(() => {
   $(".menu.back").hide();
 })
 
-// $("#multiple").click(() => {
-//   $("#newQuest").hide();
-//   $(".form-container.multiple").show();
-//   $(".form-container.trueFalse").hide();
-// })
-// $("#single").click(() => {
-//   $("#newQuest").hide();
-//   $(".form-container.multiple").hide();
-//   $(".form-container.trueFalse").show();
-// })
-
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -29,12 +18,20 @@ function shuffleArray(arr) {
   return arr;
 }
 $("#new-quest").click(() => {
+  $(".edit").empty();
+  $(".greeting").hide();
+  $(".quest-container").show();
   $(".answer").removeClass("okay yes no");
   $.get("/api/quests", quest => {
+    // quest.isAuthor ? $("#edit").show() : $("#edit").hide();
+    if (quest.isAuthor) {
+      $(".edit").append(`<button class='btn-small' id='edit'>
+      <a href="/quest/edit/${quest._id}"<a>
+      Bearbeiten</button>`);
+    }
     let answers = quest.wrong_answers;
     answers.push(quest.right_answer);
     answers = shuffleArray(answers);
-    console.log(answers);
     $(".question").html(`<h1>${quest.question}</h1>`)
     answers.forEach((answer, i) => {
       $("#answer" + i).text(answer);
@@ -56,7 +53,3 @@ $("#new-quest").click(() => {
     })
   })
 })
-
-function checkVal(val) {
-  console.log(val);
-}

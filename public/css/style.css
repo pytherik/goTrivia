@@ -35,6 +35,7 @@
 	background-image: linear-gradient(#4C679344, #00000066);
 	padding: .3rem;
 	width: 100%;
+	box-shadow: 0 1.5px 10px 1px #ffffff33 inset;
 }
 
 .navTitle {
@@ -149,7 +150,7 @@ input[type="password"] {
 
 @keyframes toGreen {
 	from {
-		background-color: #444444aa;
+		background-color: #4C6793aa;
 	} to 
 	{
 		background-color: #3FA796aa;
@@ -158,7 +159,7 @@ input[type="password"] {
 
 @keyframes toRed {
 	from {
-		background-color: #444444aa;
+		background-color: #4C6793aa;
 	} to 
 	{
 		background-color: #A10035aa;
@@ -247,6 +248,11 @@ input[type="password"] {
 	color: #ffffff44;
 }
 
+.button a {
+	text-decoration: none;
+	font-size: 3rem;
+	color: var(--mainFont);
+}
 #newQuest {
 	text-align: center;
 	font-size: 2rem;
