@@ -33,5 +33,28 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.get('/edit/:id', async (req, res) => {
+  const quest = await Quest.findById(req.params.id);
+  console.log(quest.question)
+  res.render('edit', quest);
+})
 
+router.put('/edit/:id', async (req, res) => {
+  let quest = await Quest.findById(req.params.id);
+  quest.category = req.body.category;
+  quest.question = req.body.question;
+  quest.right_answer = req.body.answer;
+  quest.wrong_answers = [req.body.wrong1, req.body.wrong2, req.body.wrong3];
+  try {
+    quest = await quest.save();
+    console.log(quest);
+    return res.redirect("/quest");
+  } 
+  catch (err) {
+    console.log(err);
+    res.redirect(`/quest/edit/${req.params.id}`)
+  }
+
+  console.log(quest);
+})
 module.exports = router;

@@ -190,6 +190,26 @@ input[type="password"] {
 	box-shadow: 0 0 5px black;
 }
 
+.btn-small {
+	font-weight: bold;
+	cursor: pointer;
+	outline: none;
+	font-size: 1.5rem;
+	background-color: lightblue;
+	color: black;
+	border-radius: 1rem;
+	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
+	padding: .3rem 2rem;
+	border: none;	
+}
+
+.btn-small a {
+	text-decoration: none;
+}
+
+.btn-small:hover {
+	filter: brightness(80%);
+}
 .logToggle {
 	text-decoration: none;
 	text-align: center;
