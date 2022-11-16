@@ -3,9 +3,7 @@ extends layouts/mainLayout
 block content
   .pre-choice
     h2#newQuest Erstelle eine neue Frage!
-    span.chose-form#multiple Multiple choice
-    span.chose-form#single Wahr oder falsch? 
-  .form-container.multiple(hidden) 
+  .form-container.multiple 
     form.create-form(action="/quest", method="POST")
       input(type="hidden", name="multiple" value="true")
       .inputField 
@@ -28,19 +26,4 @@ block content
               placeholder="3. falsche", required, autocomplete="off")
       .inputField 
         button.button.btn-green(type="submit") hinzu
-  .form-container.trueFalse(hidden)
-    form.create-form(action="/quest", method="POST")
-      .inputField 
-        input(type="text", id="category", name="category",
-              placeholder="Kategorie", required)
-      .inputField 
-        input(type="text", id="statement", name="statement",
-              placeholder="Deine Behauptung", required, autocomplete="off")
-      .inputField 
-        .tf-radio
-          label(for="right") Richtig 
-          input(type="radio", name="right", id="right", value="true")
-          label(for="wrong") Falsch 
-          input(type="radio", name="wrong", id="wrong", value="false") 
-      .inputField 
-        button.button.btn-green(type="submit") hinzu
+  

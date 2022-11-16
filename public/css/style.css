@@ -31,7 +31,8 @@
 .navbar {
 	display: flex;
 	justify-content: space-between;
-	/* background-color: #888; */
+	align-items: center;
+	background-image: linear-gradient(#4C679344, #00000066);
 	padding: .3rem;
 	width: 100%;
 }
@@ -44,7 +45,8 @@
 }
 .menu,
 .logout {
-	width: 60px;
+	width: 2.5rem;
+	height: 2.5rem;
 }
 
 .menu {
@@ -57,6 +59,9 @@
 }
 
 .form-container {
+	background-color: #481B4Fbb;
+	border-radius: 2rem;
+	padding: 1rem 3rem;
 	text-align: center;
 }
 .register {
@@ -91,11 +96,12 @@ input[type="password"] {
 
 .question {
 	width: 100%;
-	background-color: #444444aa;
+	background-color: #4C6793aa;
 	border: 1px solid #333;
 	border-radius: 1rem;
 	padding: 1rem 0; 
 	margin-top: 9rem;
+	box-shadow: inset 0 1.8em 0.25em -1.4em #ffffff33, 0 .8em .8em 0 #00000055;
 }
 
 .answers {
@@ -113,11 +119,12 @@ input[type="password"] {
 }
 
 .answer {
-	background-color: #444444aa;
+	background-color: #4C6793aa;
 	margin: 2rem 0;
 	padding: 1.2rem 0;
 	border: 1px solid #333;
 	border-radius: 1rem;	
+	box-shadow: inset 0 1.5em 0.25em -1.4em #ffffff77, 0 .8em .8em 0 #00000055;
 }
 
 #answer0, 
@@ -159,6 +166,7 @@ input[type="password"] {
 }
 
 .button {
+	outline: none;
 	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
 	margin-top: 2rem;
 	font-size: 2rem;
@@ -233,33 +241,15 @@ input[type="password"] {
 	list-style-type: none;
 	font-size: 3rem;
 	color: var(--mainFont);
-	/* color: #444; */
+}
+
+.nav-li a:hover {
+	color: #ffffff44;
 }
 
 #newQuest {
 	text-align: center;
 	font-size: 2rem;
-	margin: 1rem 0;
+	margin: 1rem;
 
-}
-
-.chose-form {
-	font-size: 1.5rem;
-	margin: 1rem 2rem;
-	padding: .5rem 1rem;
-	background-color: green;
-	border-radius: 1rem;
-}
-
-.chose-form:hover {
-	filter: brightness(150%);
-}
-
-.tf-radio {
-	font-size: 2rem;
-	margin: 1rem 3rem;
-}
-
-input[type="radio"] {
-	font-size: 2rem;
 }

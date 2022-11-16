@@ -1,5 +1,14 @@
 extends layouts/mainLayout 
 
 block content
-  .multi-container 
-    h1 #{randomQuest.question}
+	.quest-container 
+		.question
+		.answers
+			.left 
+				h2.answer#answer0 
+				h2.answer#answer1 
+			.right 
+				h2.answer#answer2
+				h2.answer#answer3 
+
+	button.button#new-quest weiter
