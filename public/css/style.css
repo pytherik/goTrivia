@@ -13,7 +13,7 @@
 
   body {
   background-color: var(--mainBg);
-	background-image: url('../images/bg1-blur.jpg');
+	background-image: url('../images/bg1-blur-sm.jpg');
 	background-size: cover;
   color: var(--mainFont);
 	font-size: 1rem;
@@ -105,6 +105,10 @@ input[type="password"] {
 	box-shadow: inset 0 1.8em 0.25em -1.4em #ffffff33, 0 .8em .8em 0 #00000055;
 }
 
+#edit-quest {
+	text-decoration: none;
+	color: var(--mainFont);
+}
 .answers {
 	margin-top: 2rem;
 	width: 100%;
@@ -117,6 +121,15 @@ input[type="password"] {
 .right {
 	width: 50%;
 	text-align: center;
+}
+
+.question-header {
+	font-size: 2rem;
+}
+
+#ed-icon {
+	font-size: 1rem;
+	margin-left: 1rem;
 }
 
 .answer {

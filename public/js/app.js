@@ -23,15 +23,23 @@ $("#new-quest").click(() => {
   $(".quest-container").show();
   $(".answer").removeClass("okay yes no");
   $.get("/api/quests", quest => {
-    if (quest.isAuthor) {
-      $(".edit").append(`<button class='btn-small' id='edit'>
-      <a href="/quest/edit/${quest._id}"<a>
-      bearbeiten</button>`);
-    }
+    // if (quest.isAuthor) {
+    //   $(".edit").append(`<button class='btn-small' id='edit'>
+    //   <a href="/quest/edit/${quest._id}"<a>
+    //   bearbeiten</button>`);
+    // }
     let answers = quest.wrong_answers;
     answers.push(quest.right_answer);
     answers = shuffleArray(answers);
-    $(".question").html(`<h1>${quest.question}</h1>`)
+    if (quest.isAuthor) {
+      $(".question").html(`
+      <a id="edit-quest" href="/quest/edit/${quest._id}">
+        <span class="question-header">${quest.question}</span><span id="ed-icon">🖊️</span>
+      </a>`);
+    } else {
+      $(".question").html(`<span class="question-header">${quest.question}</span>`)
+    }
+
     answers.forEach((answer, i) => {
       $("#answer" + i).text(answer);
       if (answer == quest.right_answer) {
