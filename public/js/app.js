@@ -84,6 +84,7 @@ $("#new-quest").click(() => {
         $("#new-quest").show();
         $(".okay").addClass("yes");
         $(".question").addClass("lost");
+        $("#timer").text("verkackt!");
         clearInterval(count);
       }
     }
