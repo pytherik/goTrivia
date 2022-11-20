@@ -2,9 +2,9 @@ extends layouts/mainLayout
 
 block content
   .greeting 
-    h1#greet Hallo #{user.username}
+    h1#greet Hallo #{user.username.toUpperCase()}!
   .quest-container(hidden)
-    h1#player Spieler: #{user.username}
+    h1#player #{user.username.toUpperCase()}
     .question
     .answers
       .left 

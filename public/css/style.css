@@ -1,8 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Cormorant+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 
 :root {
   	--mainBg: #555;
 	  --mainFont: #e9dbd5;
+		--family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
+		--fields : #735864aa;
+		--red: #A10035aa;
+		--green: #3FA796aa;
+		--blue: #8CD2EE;
+		--spacing: .1rem;
   }
 
 	* {
@@ -13,11 +22,12 @@
 
   body {
   background-color: var(--mainBg);
-	background-image: url('../images/bg1-blur-sm.jpg');
+	background-image: url('../images/ways.jpg');
 	background-size: cover;
   color: var(--mainFont);
 	font-size: 1rem;
-	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
+	font-family: var(--family);
+	font-weight: 100;
 }
 
 .layout-container {
@@ -32,18 +42,35 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-image: linear-gradient(#4C679344, #00000066);
+	background-image: linear-gradient(#735864, #9697A9);
 	padding: .3rem;
 	width: 100%;
-	box-shadow: 0 1.5px 10px 1px #ffffff33 inset;
+	/* box-shadow: 0 1.5px 4px -1.6px #A39A9D inset; */
+	box-shadow: inset 0 1.8em 0.80em -1.3em #7297FF88, 0 .8em .8em 0 #9697A9;
 }
 
 .navTitle {
 	margin: 0 auto;
+	letter-spacing: .5rem;
 	font-size: 3.5rem;
-	color: lightblue;
+	color: #2e2e2e;
 	text-align: center;
 }
+
+#greet,
+#player {
+	color: #2e2e2e;
+	letter-spacing: .2rem;
+	font-size: 2rem;
+	font-weight: 800;
+	margin-top: 2rem;
+}
+
+#greet {
+	font-size: 3rem;
+	margin-top: 15vh;
+}
+
 .menu,
 .logout {
 	width: 2.5rem;
@@ -60,7 +87,7 @@
 }
 
 .form-container {
-	background-color: #481B4Fbb;
+	background-color: #7D91A3aa;
 	border-radius: 2rem;
 	padding: 1rem 3rem;
 	text-align: center;
@@ -81,12 +108,13 @@
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
+	font-family: var(--family);
 	background-color: transparent;
 	font-size: 2.3rem;
 	color: var(--mainFont);
 	border: none;
 	outline: none;
+	letter-spacing: var(--spacing);
 	border-bottom: 1px solid var(--mainFont);
 }
 
@@ -97,11 +125,12 @@ input[type="password"] {
 
 .question {
 	width: 100%;
-	background-color: #4C6793aa;
-	border: 1px solid #333;
+	background-color: var(--fields);
+	/* border: 1px solid #333; */
 	border-radius: 1rem;
 	padding: 1rem 0; 
 	margin-top: 9rem;
+	letter-spacing: var(--spacing);
 	box-shadow: inset 0 1.8em 0.80em -1.3em #7297FF88, 0 .8em .8em 0 #00000055;
 }
 
@@ -109,6 +138,7 @@ input[type="password"] {
 	text-decoration: none;
 	color: var(--mainFont);
 }
+
 .answers {
 	margin-top: 2rem;
 	width: 100%;
@@ -133,11 +163,12 @@ input[type="password"] {
 }
 
 .answer {
-	background-color: #4C6793aa;
+	background-color: var(--fields);
 	margin: 2rem 0;
 	padding: 1.2rem 0;
-	border: 1px solid #333;
-	border-radius: 1rem;	
+	/* border: 1px solid #333; */
+	border-radius: 1rem;
+	letter-spacing: var(--spacing);	
 	box-shadow: inset 0 1.8em 0.80em -1.3em #7297FF88, 0 .8em .8em 0 #00000055;
 }
 
@@ -152,13 +183,15 @@ input[type="password"] {
 }
 
 .no {
-	background-color: #A10035aa;
+	background-color: var(--red);
 	animation: toRed 2s;
+	box-shadow: inset 0 1.8em 0.80em -1.3em #00000055, 0 .8em .8em 0 #31416c88;
 }
 
 .yes {
-	background-color: #3FA796aa;
+	background-color: var(--green);
 	animation: toGreen 2s;
+	box-shadow: inset 0 1.8em 0.80em -1.3em #00000055, 0 .8em .8em 0 #31416c88;
 }
 
 #timer {
@@ -166,11 +199,11 @@ input[type="password"] {
 }
 
 .lost {
-	border: 2px solid red;
+	border: 2px solid var(--red);
 }
 
 .won {
-	border: 5px solid green;
+	border: 2px solid var(--green);
 }
 
 @keyframes toGreen {
@@ -178,7 +211,7 @@ input[type="password"] {
 		background-color: #4C6793aa;
 	} to 
 	{
-		background-color: #3FA796aa;
+		background-color: var(--green);
 	}
 }
 
@@ -187,16 +220,16 @@ input[type="password"] {
 		background-color: #4C6793aa;
 	} to 
 	{
-		background-color: #A10035aa;
+		background-color: var(--red);
 	}
 }
 
 .button {
 	outline: none;
-	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
+	font-family: var(--family);
 	margin-top: 2rem;
 	font-size: 2rem;
-	color: lightgreen;
+	color: #8CD2EE;
 	font-weight: bold;
 	padding: 1rem 3rem;
 	border: none;
@@ -220,10 +253,10 @@ input[type="password"] {
 	cursor: pointer;
 	outline: none;
 	font-size: 1.5rem;
-	background-color: lightblue;
+	background-color: var(--blue);
 	color: black;
 	border-radius: 1rem;
-	font-family: 'Cormorant SC', Arial, Helvetica, sans-serif;
+	font-family: var(--family);
 	padding: .3rem 2rem;
 	border: none;	
 }
@@ -239,7 +272,7 @@ input[type="password"] {
 	text-decoration: none;
 	text-align: center;
 	font-size: 1.5rem;
-	color: lightblue;
+	color: var(--blue);
 }
 
 .logToggle:hover {
@@ -248,7 +281,7 @@ input[type="password"] {
 
 .menu-modal {
 	position: fixed;
-	background-color: #000000bb;
+	background-color: #000000aa;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -260,12 +293,12 @@ input[type="password"] {
 
 .inner-modal {
 	text-align: center;
-	background-color: #481B4Faa;
+	background-color: #7D91A3aa;
 	padding: 5rem 2rem;
 	width: 35%;
 	border: 1px solid #aaaaaa44;
-	border-radius: 3rem;
-	animation: appear 2s;
+	border-radius: 1rem;
+	animation: appear 1s;
 }
 
 @keyframes appear {
@@ -302,5 +335,5 @@ input[type="password"] {
 	text-align: center;
 	font-size: 2rem;
 	margin: 1rem;
-
+	letter-spacing: var(--spacing);
 }

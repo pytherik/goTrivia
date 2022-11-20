@@ -54,7 +54,7 @@ $("#new-quest").click(() => {
         $("#new-quest").show();
         const guess = e.target.innerHTML;
         if (guess == quest.right_answer) {
-          $("#timer").text("gewonnen!")
+          $("#timer").text(`Glückwunsch! ${time} Punkte!`);
           $("#answer" + i).addClass("yes");
           $(".question").addClass("won");
           score = time;
