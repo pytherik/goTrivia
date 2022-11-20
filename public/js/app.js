@@ -18,6 +18,9 @@ function shuffleArray(arr) {
   return arr;
 }
 $("#new-quest").click(() => {
+  $(".question").removeClass("won lost");
+  $("#new-quest").hide();
+  $("#timer").text("15");
   $(".edit").empty();
   $(".greeting").hide();
   $(".quest-container").show();
@@ -46,17 +49,35 @@ $("#new-quest").click(() => {
         $("#answer" + i).addClass("okay")
       }
       $("#answer" + i).click((e) => {
+        clearInterval(count);
+        $("#new-quest").show();
         const guess = e.target.innerHTML;
         if (guess == quest.right_answer) {
+          $("#timer").text("gewonnen!")
           $("#answer" + i).addClass("yes");
+          $(".question").addClass("won");
           console.log("Richtig");
         }
         else {
           $("#answer" + i).addClass("no");
+          $(".question").addClass("lost");
+          $("#timer").text("verloren!")
           $(".okay").addClass("yes");
           console.log("Falsch");
         }
       })
     })
+    let time = 15;
+    const down = () => {
+      time--;
+      $("#timer").text(`${time}`)
+      if (time == 0) {
+        $("#new-quest").show();
+        $(".okay").addClass("yes");
+        $(".question").addClass("lost");
+        clearInterval(count);
+      }
+    }
+    const count = setInterval(down, 1000);
   })
 })

@@ -102,7 +102,7 @@ input[type="password"] {
 	border-radius: 1rem;
 	padding: 1rem 0; 
 	margin-top: 9rem;
-	box-shadow: inset 0 1.8em 0.25em -1.4em #ffffff33, 0 .8em .8em 0 #00000055;
+	box-shadow: inset 0 1.8em 0.80em -1.3em #7297FF88, 0 .8em .8em 0 #00000055;
 }
 
 #edit-quest {
@@ -138,7 +138,7 @@ input[type="password"] {
 	padding: 1.2rem 0;
 	border: 1px solid #333;
 	border-radius: 1rem;	
-	box-shadow: inset 0 1.5em 0.25em -1.4em #ffffff77, 0 .8em .8em 0 #00000055;
+	box-shadow: inset 0 1.8em 0.80em -1.3em #7297FF88, 0 .8em .8em 0 #00000055;
 }
 
 #answer0, 
@@ -159,6 +159,18 @@ input[type="password"] {
 .yes {
 	background-color: #3FA796aa;
 	animation: toGreen 2s;
+}
+
+#timer {
+	font-size: 2rem;
+}
+
+.lost {
+	border: 2px solid red;
+}
+
+.won {
+	border: 5px solid green;
 }
 
 @keyframes toGreen {
