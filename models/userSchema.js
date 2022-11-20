@@ -6,6 +6,7 @@ const TrivUserSchema = new Schema({
   username: { type: String, required: true },
   email:    { type: String, required: true },
   password: { type: String, required: true },
+  score: { type: Number, default: 0 },
 }, { timestamps: true });
 
 const User = mongoose.model('TrivUser', TrivUserSchema);

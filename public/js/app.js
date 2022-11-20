@@ -18,6 +18,8 @@ function shuffleArray(arr) {
   return arr;
 }
 $("#new-quest").click(() => {
+  let time = 15;
+  let score = 0;
   $(".question").removeClass("won lost");
   $("#new-quest").hide();
   $("#timer").text("15");
@@ -25,22 +27,21 @@ $("#new-quest").click(() => {
   $(".greeting").hide();
   $(".quest-container").show();
   $(".answer").removeClass("okay yes no");
+
   $.get("/api/quests", quest => {
-    // if (quest.isAuthor) {
-    //   $(".edit").append(`<button class='btn-small' id='edit'>
-    //   <a href="/quest/edit/${quest._id}"<a>
-    //   bearbeiten</button>`);
-    // }
+
     let answers = quest.wrong_answers;
     answers.push(quest.right_answer);
     answers = shuffleArray(answers);
     if (quest.isAuthor) {
       $(".question").html(`
       <a id="edit-quest" href="/quest/edit/${quest._id}">
-        <span class="question-header">${quest.question}</span><span id="ed-icon">🖊️</span>
+        <span class="question-header">${quest.question}</span>
+        <span id="ed-icon">🖊️</span>
       </a>`);
     } else {
-      $(".question").html(`<span class="question-header">${quest.question}</span>`)
+      $(".question").html(`
+      <span class="question-header">${quest.question}</span>`);
     }
 
     answers.forEach((answer, i) => {
@@ -56,7 +57,14 @@ $("#new-quest").click(() => {
           $("#timer").text("gewonnen!")
           $("#answer" + i).addClass("yes");
           $(".question").addClass("won");
+          score = time;
           console.log("Richtig");
+          console.log("Score: ", score);
+          $.ajax({
+            url: `/api/quests/score/${score}`,
+            type: "PUT",
+            success: console.log("success")
+          });
         }
         else {
           $("#answer" + i).addClass("no");
@@ -67,7 +75,8 @@ $("#new-quest").click(() => {
         }
       })
     })
-    let time = 15;
+    console.log("Score: ", score);
+
     const down = () => {
       time--;
       $("#timer").text(`${time}`)

@@ -12,8 +12,14 @@ router.get('/', async (req, res) => {
   const num = Math.floor(Math.random() * questions.length);
   const randomQuest = questions[num];
   randomQuest.isAuthor = req.session.user._id == randomQuest.author;
-  console.log(randomQuest.isAuthor)
   res.send(randomQuest);
 })
+
+router.put('/score/:amount', async (req, res) => {
+  const userId = req.session.user._id;
+  req.session.user = await User.findByIdAndUpdate(userId, { $inc: { score: req.params.amount } });
+  res.sendStatus(200);
+})
+
 
 module.exports = router;

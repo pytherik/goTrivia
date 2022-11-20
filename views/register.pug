@@ -9,11 +9,13 @@ block content
         .inputField
           .errMsg
             span.formErr #{nameErr}
-          input(type="text", id="username", name="username", placeholder="dein Triv-Name", value=username, required)
+          input(type="text", id="username", name="username", 
+                placeholder="dein Triv-Name", value=username, required, autofocus)
         .inputField
           .errMsg
             span.formErr #{emailErr}
-          input(type="email", id="email", name="email", placeholder="E-Mail", value=email, required)
+          input(type="email", id="email", name="email", 
+                placeholder="E-Mail", value=email, required)
         .inputField
           .errMsg
             span.formErr #{passErr}
