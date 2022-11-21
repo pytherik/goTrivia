@@ -22,7 +22,7 @@
 
   body {
   background-color: var(--mainBg);
-	background-image: url('../images/ways-left.jpg');
+	background-image: url('./images/ways-left.jpg');
 	background-size: cover;
   color: var(--mainFont);
 	font-size: 1rem;
@@ -340,9 +340,18 @@ input[type="password"] {
 	letter-spacing: var(--spacing);
 }
 
+@media screen and (max-width: 1600px) {
+	html {
+		font-size: 85%;
+	}
+
+	.question {
+		margin-top: 6rem;
+	}
+}
 @media screen and (max-width: 1200px) {
 	html {
-		font-size: 90%;
+		font-size: 80%;
 	}
 	.answers {
 		flex-direction: column;
@@ -369,7 +378,7 @@ input[type="password"] {
 	
 	.inner-modal {
 		/* padding: 5rem 2rem; */
-		width: 85%;
+		width: 80%;
 		font-size: 2.2rem;
 		border: 1px solid #aaaaaa44;
 		border-radius: 1rem;
