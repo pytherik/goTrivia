@@ -22,7 +22,7 @@
 
   body {
   background-color: var(--mainBg);
-	background-image: url('./images/ways-left.jpg');
+	background-image: url('../images/ways-left.jpg');
 	background-size: cover;
   color: var(--mainFont);
 	font-size: 1rem;
