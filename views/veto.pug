@@ -1,0 +1,17 @@
+extends layouts/mainLayout
+
+block content
+  .pre-choice
+    h2#newQuest Zur Frage: #{message}
+    h2#newQuest Bisherige Antwort: #{current}
+  .form-container.multiple 
+    form.create-form(action="/quest/veto/"+id, method="POST")
+      .inputField
+        input(type="text", id="correct", name="correct",  
+              placeholder="Deine richtige Antwort", autocomplete="off")
+      .inputField 
+        textarea(id="comment", name="comment",  
+              placeholder="Bitte kommentiere dein Veto.", autocomplete="off")
+      .inputField 
+        button.btn-small.blue(type="submit") Veto einreichen
+  

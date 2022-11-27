@@ -1,3 +1,5 @@
+//: Show, hide Menu
+
 $(document).ready(() => { $(".menu-modal").hide() });
 $(".menu").click(() => {
   $(".menu-modal").show();
@@ -9,7 +11,7 @@ $(".back").click(() => {
   $(".menu").show();
   $(".menu.back").hide();
 })
-
+          //: Antworten in zufällige Reihenfolge bringen
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -17,9 +19,10 @@ function shuffleArray(arr) {
   }
   return arr;
 }
+          //: neue Frage (Button 'next')
 $("#new-quest").click(() => {
   let time = 15;
-  let score = 0;
+  let score = 0;  //* Anfangszustand herstellen ↓↓↓
   $(".question").removeClass("won lost");
   $("#new-quest").hide();
   $("#timer").text("15");
@@ -29,19 +32,25 @@ $("#new-quest").click(() => {
   $(".answer").removeClass("okay yes no");
 
   $.get("/api/quests", quest => {
+    let num = '';
+    quest.veto.length > 0 ? num = quest.veto.length : num = '';
 
     let answers = quest.wrong_answers;
     answers.push(quest.right_answer);
     answers = shuffleArray(answers);
+          //: Autor darf editieren
     if (quest.isAuthor) {
       $(".question").html(`
       <a id="edit-quest" href="/quest/edit/${quest._id}">
         <span class="question-header">${quest.question}</span>
-        <span id="ed-icon">🖊️</span>
+        <span id="ed-icon">🖊️${num}</span>
       </a>`);
     } else {
       $(".question").html(`
-      <span class="question-header">${quest.question}</span>`);
+      <a id="edit-quest" href="/quest/veto/${quest._id}">
+        <span class="question-header">${quest.question}</span>
+        <span id="ed-icon">☝🏻${num}</span>
+      </a>`);
     }
 
     answers.forEach((answer, i) => {

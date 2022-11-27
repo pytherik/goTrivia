@@ -162,6 +162,7 @@ input[type="password"] {
 #ed-icon {
 	font-size: 1rem;
 	margin-left: 1rem;
+	color: var(--red);
 }
 
 .answer {
@@ -250,19 +251,36 @@ input[type="password"] {
 	box-shadow: 0 0 2px #2e2e2e;
 }
 
+.button a {
+	text-decoration: none;
+	font-size: 3rem;
+	color: var(--mainFont);
+}
+
 .btn-small {
 	font-weight: bold;
 	cursor: pointer;
 	outline: none;
 	font-size: 1.5rem;
-	background-color: var(--blue);
 	color: black;
 	border-radius: 1rem;
 	font-family: var(--family);
 	padding: .3rem 2rem;
+	margin: 0 .4rem;
 	border: none;	
 }
 
+.blue {
+	background-color: var(--blue);
+}
+
+.red {
+	background-color: var(--red);
+}
+
+.green {
+	background-color: var(--green);
+}
 .btn-small a {
 	text-decoration: none;
 }
@@ -328,11 +346,6 @@ input[type="password"] {
 	color: #ffffff44;
 }
 
-.button a {
-	text-decoration: none;
-	font-size: 3rem;
-	color: var(--mainFont);
-}
 #newQuest {
 	text-align: center;
 	font-size: 2rem;
@@ -400,7 +413,7 @@ input[type="password"] {
 	}
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
 	html {
 		font-size: 55%;
 	}

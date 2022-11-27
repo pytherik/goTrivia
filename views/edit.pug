@@ -26,5 +26,7 @@ block content
               placeholder="3. falsche", required, value=wrong_answers[2], autocomplete="off")
       .inputField 
         button.button(type="submit") ändern 
-      button.btn-small: a(href="/quest") abbruch
+      button.btn-small.blue: a(href="/quest") abbruch
+    form(action="/quest/edit/"+_id+"?_method=DELETE", method="POST")
+      button.btn-small.red(type="submit") löschen
   

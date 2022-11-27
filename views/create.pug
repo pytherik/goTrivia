@@ -2,7 +2,7 @@ extends layouts/mainLayout
 
 block content
   .pre-choice
-    h2#newQuest Erstelle eine neue Frage!
+    h2#newQuest #{message}
   .form-container.multiple 
     form.create-form(action="/quest", method="POST")
       input(type="hidden", name="multiple" value="true")

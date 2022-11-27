@@ -56,17 +56,13 @@ app.use('/api/quests', questsApiRouter);
 
 
 app.get('/', middleware.redirectLogin, async(req, res, next) => {
-  const payload = {
-    title: req.session.user.username
-  }
+  const user = req.session.user;
   const questions = await Quest.find({});
   if (questions.length == 0) {
-    payload.message = 'Es gibt noch nichts zu raten!';
-    return res.render('create');
+    const message = { message: 'Es gibt noch nichts zu raten!' };
+    return res.render('create', message);
   }
-  res.render('index');
-  // console.log(questions);
-	// return res.redirect('/quest');
+  res.render('index', user);
 });
 
 app.listen(PORT, () => console.log('Listening on Port:', PORT));

@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
     const result = await bcrypt.compare(password, user.password);
     if (result == true) {
       req.session.user = user;
-      return res.redirect('/');
+      return res.redirect('/');                             //* destination: get('/') in index.js
     } else {
       return res.render('login', { passErr: "Passwort falsch!", username: username })
     }

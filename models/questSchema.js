@@ -7,7 +7,8 @@ const QuestSchema = new Schema({
   category:      { type: String },
   question:      { type: String, required: true, unique: true },
   right_answer:  { type: String },
-  wrong_answers: [{ type: String }],  
+  wrong_answers: [{ type: String }], 
+  veto :         [{ type: Schema.Types.ObjectId }],
   isMultiple:    { type: Boolean },
   isTrue:        { type: Boolean },
 }, { timestamps: true });
