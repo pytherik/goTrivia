@@ -2,6 +2,9 @@ extends layouts/mainLayout
 
 block content
 	.welcome 
-		h1 Hallo #{username}
+		h1#greet Hallo #{user.username}
+		h2 #{message}
+		if has_vetos
+			button.btn-small: a(href="/quest/vetos") ansehen
 	.space
 	button.button#new-quest: a(href="/quest") Play

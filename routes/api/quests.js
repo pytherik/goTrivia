@@ -10,7 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 router.get('/', async (req, res) => {
   const questions = await Quest.find({}).lean();
   const num = Math.floor(Math.random() * questions.length);
+  console.log(num, questions.length);
   const randomQuest = questions[num];
+  console.log(randomQuest);
   randomQuest.isAuthor = req.session.user._id == randomQuest.author;
   res.send(randomQuest);
 })

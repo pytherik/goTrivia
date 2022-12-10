@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const Quest = require('./models/questSchema');
+const Veto = require('./models/vetoSchema');
 const mongoose = require('./connectDB');
 
 const path = require('path');
@@ -42,7 +43,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set(path.join(__dirname, './views'));
 app.set('view engine', 'pug');
 
+
 //: Routen Login, Register, Logout
+
 const loginRouter = require('./routes/loginRoutes');
 app.use('/login', loginRouter);
 const registerRouter = require('./routes/registerRoutes');
@@ -50,23 +53,37 @@ app.use('/register', registerRouter);
 const logoutRouter = require('./routes/logoutRoute');
 app.use('/logout', logoutRouter);
 
+
 //: CRUD Route
+
 const questRouter = require('./routes/questRoutes');
 app.use('/quest', questRouter);
 
+
 //: Route für Ajax Requests
+
 const questsApiRouter = require('./routes/api/quests');
 app.use('/api/quests', questsApiRouter);
 
 
 app.get('/', middleware.redirectLogin, async(req, res, next) => {
+  let message = '';
+  let has_vetos = false;
   const user = req.session.user;
   const questions = await Quest.find({});
+  const vetos = await Veto.find({ quest_author: user._id });
   if (questions.length == 0) {
-    const message = { message: 'Es gibt noch nichts zu raten!' };
+    message = { message: 'Es gibt noch nichts zu raten!' };
     return res.render('create', message);
   }
-  res.render('index', user);
+  if (vetos.length == 0) {
+    message = 'Keine Einwände zu deinen Fragen!';
+  }
+  else {
+    message = `Zu ${vetos.length} Frage(n) gibt es Einwände!`
+    has_vetos = true;
+  }
+  res.render('index', { user: user, message: message, has_vetos});
 });
 
 app.listen(PORT, () => console.log('Listening on Port:', PORT));

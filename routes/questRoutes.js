@@ -50,7 +50,9 @@ router.put('/edit/:id', async (req, res) => {
   quest.question = req.body.question;
   quest.right_answer = req.body.answer;
   quest.wrong_answers = [req.body.wrong1, req.body.wrong2, req.body.wrong3];
+  quest.veto = [];
   try {
+    await Veto.findOneAndDelete({ quest_id: quest._id });
     quest = await quest.save();
     console.log(quest);
     return res.redirect("/quest");
@@ -80,16 +82,21 @@ router.get('/veto/:id', async (req, res) => {
 
 router.post('/veto/:id', async (req, res) => {
   const quest = await Quest.findByIdAndUpdate(req.params.id, { $addToSet: { veto: req.session.user._id } }, {new: true} );
-  console.log(quest);
   const data = {
     author: req.session.user._id,
     quest_author: quest.author,
     question: quest.question,
+    quest_id: quest._id,
     new_answer: req.body.correct,
+    old_answer: quest.right_answer,
     comment: req.body.comment
   };
   Veto.create(data);
   res.redirect('/quest');
 })
 
+router.get('/vetos', async (req, res) => {
+  const vetos = await Veto.find({ quest_author: req.session.user._id });
+  res.render('allVetos', { vetos: vetos } );
+})
 module.exports = router;

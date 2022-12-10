@@ -35,27 +35,28 @@ $("#new-quest").click(() => {
   $(".quest-container").show();
   $(".answer").removeClass("okay yes no");
 
-
-  $.get("/api/quests", quest => {  //: ajax Datenbankabfrage in routes/api/quests.js
-    let num = '';
-    quest.veto.length > 0 ? num = quest.veto.length : num = '';
+  //: ajax Datenbankabfrage in routes/api/quests.js
+  $.get("/api/quests", quest => {  
+    let num_vetos = '';
+    quest.veto.length > 0 ? num_vetos = quest.veto.length : num_vetos = '';
 
     let answers = quest.wrong_answers;
     answers.push(quest.right_answer);
     answers = shuffleArray(answers);
           
-    if (quest.isAuthor) {          //: Autor darf editieren
+    //: Autor darf editieren
+    if (quest.isAuthor) {          
       $(".question").html(`
       <a id="edit-quest" href="/quest/edit/${quest._id}">
         <span class="question-header">${quest.question}</span>
-        <span id="ed-icon">🖊️${num}</span>       //* Vetos anzeigen
-      </a>`);
+        <span id="ed-icon">🖊️${num_vetos}</span>       
+      </a>`);                                    //* Vetos anzeigen
     } else {
       $(".question").html(`
       <a id="edit-quest" href="/quest/veto/${quest._id}">
         <span class="question-header">${quest.question}</span>
-        <span id="ed-icon">☝🏻${num}</span>       //* Vetos anzeigen
-      </a>`);
+        <span id="ed-icon">☝🏻${num_vetos}</span>       
+      </a>`);                                    //* Vetos anzeigen
     }
 
     answers.forEach((answer, i) => {
@@ -67,21 +68,24 @@ $("#new-quest").click(() => {
         clearInterval(count);  //* Countdown stoppen
         $("#new-quest").show();
         const guess = e.target.innerHTML;
-        if (guess == quest.right_answer) {        //: richtige Antwort
+        //: richtige Antwort
+        if (guess == quest.right_answer) {        
           $("#timer").text(`Glückwunsch! ${time} Punkte!`);
           $("#answer" + i).addClass("yes");
           $(".question").addClass("won");
           score = time;
           console.log("Richtig");
           console.log("Score: ", score);
-          $.ajax({                              //: update Scoring
+          //: update Scoring
+          $.ajax({                              
             url: `/api/quests/score/${score}`,
             type: "PUT",
             success: console.log("success")
           });
         }
+        //: falsche Antwort
         else {
-          $("#answer" + i).addClass("no");       //: falsche Antwort
+          $("#answer" + i).addClass("no");       
           $(".question").addClass("lost");
           $("#timer").text("verloren!")
           $(".okay").addClass("yes");
