@@ -7,6 +7,7 @@ const Veto = require('../models/vetoSchema');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//: Zufallsfrage - multiple.pug
 router.get('/', async (req, res) => {
   const user = req.session.user;
   const questions = await Quest.find({}).lean();
@@ -15,6 +16,7 @@ router.get('/', async (req, res) => {
   return res.render('multiple', { user, randomQuest });
 })
 
+//: Frage erstellen - create.pug
 router.get('/create', (req, res) => {
   const message = { message: 'Erstelle eine neue Frage!'}
   return res.render('create', message);
@@ -35,6 +37,7 @@ router.post('/', async (req, res) => {
   }
 })
 
+//: Editieren - edit.pug
 router.get('/edit/:id', async (req, res) => {
   const quest = await Quest.findById(req.params.id);
   console.log(quest.question)
@@ -60,6 +63,7 @@ router.put('/edit/:id', async (req, res) => {
   console.log(quest);
 })
 
+//: Löschen - edit.pug
 router.delete('/edit/:id', (req, res) => {
   console.log(req.params.id);
   Quest.findByIdAndDelete(req.params.id)
@@ -67,6 +71,7 @@ router.delete('/edit/:id', (req, res) => {
     .catch((err) => console.log(err))
 })
 
+//: Veto - veto.pug
 router.get('/veto/:id', async (req, res) => {
   const quest = await Quest.findById(req.params.id);
   const payload = { message: quest.question, current: quest.right_answer, id: req.params.id };

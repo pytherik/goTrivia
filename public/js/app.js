@@ -1,4 +1,4 @@
-//: Show, hide Menu
+//: Show, hide Menu-Modal
 
 $(document).ready(() => { $(".menu-modal").hide() });
 $(".menu").click(() => {
@@ -11,7 +11,9 @@ $(".back").click(() => {
   $(".menu").show();
   $(".menu.back").hide();
 })
-          //: Antworten in zufällige Reihenfolge bringen
+
+//: Shuffle Funktion für Antworten
+
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -19,7 +21,9 @@ function shuffleArray(arr) {
   }
   return arr;
 }
-          //: neue Frage (Button 'next')
+
+//: neue Frage (Button 'next')
+
 $("#new-quest").click(() => {
   let time = 15;
   let score = 0;  //* Anfangszustand herstellen ↓↓↓
@@ -31,25 +35,26 @@ $("#new-quest").click(() => {
   $(".quest-container").show();
   $(".answer").removeClass("okay yes no");
 
-  $.get("/api/quests", quest => {
+
+  $.get("/api/quests", quest => {  //: ajax Datenbankabfrage in routes/api/quests.js
     let num = '';
     quest.veto.length > 0 ? num = quest.veto.length : num = '';
 
     let answers = quest.wrong_answers;
     answers.push(quest.right_answer);
     answers = shuffleArray(answers);
-          //: Autor darf editieren
-    if (quest.isAuthor) {
+          
+    if (quest.isAuthor) {          //: Autor darf editieren
       $(".question").html(`
       <a id="edit-quest" href="/quest/edit/${quest._id}">
         <span class="question-header">${quest.question}</span>
-        <span id="ed-icon">🖊️${num}</span>
+        <span id="ed-icon">🖊️${num}</span>       //* Vetos anzeigen
       </a>`);
     } else {
       $(".question").html(`
       <a id="edit-quest" href="/quest/veto/${quest._id}">
         <span class="question-header">${quest.question}</span>
-        <span id="ed-icon">☝🏻${num}</span>
+        <span id="ed-icon">☝🏻${num}</span>       //* Vetos anzeigen
       </a>`);
     }
 
@@ -59,24 +64,24 @@ $("#new-quest").click(() => {
         $("#answer" + i).addClass("okay")
       }
       $("#answer" + i).click((e) => {
-        clearInterval(count);
+        clearInterval(count);  //* Countdown stoppen
         $("#new-quest").show();
         const guess = e.target.innerHTML;
-        if (guess == quest.right_answer) {
+        if (guess == quest.right_answer) {        //: richtige Antwort
           $("#timer").text(`Glückwunsch! ${time} Punkte!`);
           $("#answer" + i).addClass("yes");
           $(".question").addClass("won");
           score = time;
           console.log("Richtig");
           console.log("Score: ", score);
-          $.ajax({
+          $.ajax({                              //: update Scoring
             url: `/api/quests/score/${score}`,
             type: "PUT",
             success: console.log("success")
           });
         }
         else {
-          $("#answer" + i).addClass("no");
+          $("#answer" + i).addClass("no");       //: falsche Antwort
           $(".question").addClass("lost");
           $("#timer").text("verloren!")
           $(".okay").addClass("yes");
@@ -86,7 +91,8 @@ $("#new-quest").click(() => {
     })
     console.log("Score: ", score);
 
-    const down = () => {
+    //: Countdown Funktion
+    const countdown = () => {    //* Start: neue Frage
       time--;
       $("#timer").text(`${time}`)
       if (time == 0) {
@@ -97,6 +103,6 @@ $("#new-quest").click(() => {
         clearInterval(count);
       }
     }
-    const count = setInterval(down, 1000);
+    const count = setInterval(countdown, 1000);
   })
 })
