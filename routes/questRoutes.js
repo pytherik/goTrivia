@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //: Zufallsfrage - multiple.pug
 router.get('/', async (req, res) => {
+  console.log(req.body);
   const user = req.session.user;
   const questions = await Quest.find({}).lean();
   const num = Math.floor(Math.random() * questions.length);
@@ -31,7 +32,6 @@ router.post('/', async (req, res) => {
     payload.question = quest.question;
     payload.right_answer = quest.answer;
     payload.wrong_answers = [ quest.wrong1, quest.wrong2, quest.wrong3 ]
-    console.log(payload);
     Quest.create(payload);
     return res.redirect('/quest/create');
   }
@@ -40,7 +40,6 @@ router.post('/', async (req, res) => {
 //: Editieren - edit.pug
 router.get('/edit/:id', async (req, res) => {
   const quest = await Quest.findById(req.params.id);
-  console.log(quest.question)
   res.render('edit', quest);
 })
 
@@ -54,7 +53,6 @@ router.put('/edit/:id', async (req, res) => {
   try {
     await Veto.findOneAndDelete({ quest_id: quest._id });
     quest = await quest.save();
-    console.log(quest);
     return res.redirect("/quest");
   } 
   catch (err) {
@@ -62,12 +60,10 @@ router.put('/edit/:id', async (req, res) => {
     res.redirect(`/quest/edit/${req.params.id}`)
   }
 
-  console.log(quest);
 })
 
 //: Löschen - edit.pug
 router.delete('/edit/:id', (req, res) => {
-  console.log(req.params.id);
   Quest.findByIdAndDelete(req.params.id)
     .then(() => res.redirect('/'))
     .catch((err) => console.log(err))
@@ -98,5 +94,11 @@ router.post('/veto/:id', async (req, res) => {
 router.get('/vetos', async (req, res) => {
   const vetos = await Veto.find({ quest_author: req.session.user._id });
   res.render('allVetos', { vetos: vetos } );
+})
+
+router.get('/vetoDetails/:id', async (req, res) => {
+  const veto = await Veto.findById(req.params.id);
+  console.log(veto);
+  res.render('vetoDetails', veto);
 })
 module.exports = router;

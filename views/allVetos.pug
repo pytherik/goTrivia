@@ -1,13 +1,12 @@
 extends layouts/mainLayout
 
 block content
-
-  .welcome 
-    h1#greet Einwände 
-  .space 
-    each veto in vetos 
-      ul 
-        li: a(href="/quest/edit/"+veto.quest_id)= veto.question
   .space
-    button.btn-small.green: a(href="/quest") Play
+  .form-container.show-veto
+    h2 Zu diesen Fragen gibt es eine Meldung: 
+    each veto in vetos 
+      p.veto.show: a(href="/quest/vetoDetails/"+veto._id)= veto.question
+    .inputField
+      button.btn-small.green: a(href="/quest") Ich will lieber spielen
+  .space
    

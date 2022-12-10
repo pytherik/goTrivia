@@ -69,6 +69,8 @@ app.use('/api/quests', questsApiRouter);
 app.get('/', middleware.redirectLogin, async(req, res, next) => {
   let message = '';
   let has_vetos = false;
+  const categories = await Quest.distinct('category', {});
+  console.log(categories);
   const user = req.session.user;
   const questions = await Quest.find({});
   const vetos = await Veto.find({ quest_author: user._id });
@@ -80,10 +82,15 @@ app.get('/', middleware.redirectLogin, async(req, res, next) => {
     message = 'Keine Einwände zu deinen Fragen!';
   }
   else {
-    message = `Zu ${vetos.length} Frage(n) gibt es Einwände!`
+    if (vetos.length == 1) {
+      message = 'Eine Frage wurde beanstandet!'
+    } else {
+      message = `${vetos.length} Fragen wurden beanstandet!`
+    }
     has_vetos = true;
+
   }
-  res.render('index', { user: user, message: message, has_vetos});
+  res.render('index', { user: user, message: message, categories, has_vetos});
 });
 
 app.listen(PORT, () => console.log('Listening on Port:', PORT));

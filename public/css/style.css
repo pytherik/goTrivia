@@ -68,7 +68,25 @@
 
 #greet {
 	font-size: 3rem;
-	margin-top: 15vh;
+	margin-top: 5vh;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold;
+	filter: brightness(80%);
+}
+
+li {
+	list-style-type: disc;
+}
+
+.veto a {
+	font-size: 1.6rem;
+	color: #444;
 }
 
 .menu,
@@ -86,6 +104,12 @@
 	margin-top: 12vh;
 }
 
+.index-container {
+	width: 100vw;
+	display: flex;
+	justify-content: space-around;
+}
+
 .form-container {
 	background-color: #7D91A3aa;
 	border-radius: 2rem;
@@ -95,10 +119,19 @@
 
 .form-container.veto-container {
 	width: 45%;
-	background-color: #7D91A3aa;
-	border-radius: 2rem;
-	padding: 1rem 3rem;
-	text-align: center;
+}
+
+.form-container.show-veto {
+	padding-top: 2rem;
+	text-align: left;
+}
+
+.form-container.index {
+	width: 28%;
+}
+
+.form-container.transparent {
+	background-color: transparent;
 }
 
 .register {
@@ -111,6 +144,7 @@
 	margin: 0 auto;
 	margin-bottom: 2rem;
 }
+
 .inputField {
 	margin: 2rem 0;
 	text-align: center;
@@ -160,6 +194,18 @@ textarea {
 	text-align: center;
 }
 
+.veto.show {
+	margin: .5rem 0;
+	text-align: left;
+}
+
+.veto.cats {
+	text-align: left;
+}
+
+#cats {
+	margin-bottom: 2rem;
+}
 .quest-container {
 	width: 50%;
 	text-align: center;

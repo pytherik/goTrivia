@@ -1,0 +1,18 @@
+extends layouts/mainLayout
+
+block content 
+
+  .container 
+
+  .form-container.show-veto
+    h2 Zur Frage: 
+    p.veto.show #{question}
+    h2 Bisherige Antwort 
+    p.veto.show #{old_answer}
+    h2 Antwortvorschlag 
+    p.veto.show #{new_answer}
+    h2 Kommentar 
+    p.veto.show #{comment}
+    .inputField
+      button.btn-small.blue: a(href="/quest/edit/"+quest_id) bearbeiten
+      button.btn-small: a(href="/") zurück

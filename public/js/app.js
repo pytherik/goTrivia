@@ -74,13 +74,10 @@ $("#new-quest").click(() => {
           $("#answer" + i).addClass("yes");
           $(".question").addClass("won");
           score = time;
-          console.log("Richtig");
-          console.log("Score: ", score);
           //: update Scoring
           $.ajax({                              
             url: `/api/quests/score/${score}`,
             type: "PUT",
-            success: console.log("success")
           });
         }
         //: falsche Antwort
@@ -89,11 +86,9 @@ $("#new-quest").click(() => {
           $(".question").addClass("lost");
           $("#timer").text("verloren!")
           $(".okay").addClass("yes");
-          console.log("Falsch");
         }
       })
     })
-    console.log("Score: ", score);
 
     //: Countdown Funktion
     const countdown = () => {    //* Start: neue Frage
