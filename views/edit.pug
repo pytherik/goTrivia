@@ -3,30 +3,30 @@ extends layouts/mainLayout
 block content
   .pre-choice
     h2#newQuest Bearbeiten
-  .form-container.multiple 
+  .form-container
     form.create-form(action="/quest/edit/"+_id+"?_method=PUT", method="POST")
       input(type="hidden", name="multiple" value="true")
       .inputField 
-        input(type="text", id="cat", name="category",  
+        input(type="text", id="cat", name="category", size="30",  
               placeholder="Kategorie", value=category, required)
+      .inputField.textarea 
+        textarea.create(type="text", id="question", name="question",  
+              placeholder="Stelle eine Frage", rows="2", cols="35",required, autocomplete="off")= question
+      .inputField.textarea 
+        textarea.create(type="text", id="answer", name="answer",  
+              placeholder="Die richtige Antwort", rows="2", cols="35",required, autocomplete="off")= right_answer
+      .inputField.textarea 
+        textarea.create(type="text", id="wrong1", name="wrong1",  
+              placeholder="1. falsche Antwort", rows="2", cols="35",required, autocomplete="off")= wrong_answers[0]
+      .inputField.textarea 
+        textarea.create(type="text", id="wrong2", name="wrong2",  
+              placeholder="2. falsche", rows="2", cols="35",required, autocomplete="off")= wrong_answers[1]
+      .inputField.textarea 
+        textarea.create(type="text", id="wrong3", name="wrong3",  
+              placeholder="3. falsche", rows="2", cols="35",required,  autocomplete="off")= wrong_answers[2]
       .inputField 
-        input(type="text", id="question", name="question",  
-              placeholder="Stelle eine Frage", required, value=question, autocomplete="off")
-      .inputField 
-        input(type="text", id="answer", name="answer",  
-              placeholder="Die richtige Antwort", required, value=right_answer, autocomplete="off")
-      .inputField 
-        input(type="text", id="wrong1", name="wrong1",  
-              placeholder="1. falsche Antwort", required, value=wrong_answers[0], autocomplete="off")
-      .inputField 
-        input(type="text", id="wrong2", name="wrong2",  
-              placeholder="2. falsche", required, value=wrong_answers[1], autocomplete="off")
-      .inputField 
-        input(type="text", id="wrong3", name="wrong3",  
-              placeholder="3. falsche", required, value=wrong_answers[2], autocomplete="off")
-      .inputField 
-        button.button(type="submit") ändern 
-      button.btn-small.blue: a(href="/quest") abbruch
-    form(action="/quest/edit/"+_id+"?_method=DELETE", method="POST")
-      button.btn-small.red(type="submit") löschen
+        button.btn-small.green(type="submit") ändern 
+        button.btn-small.blue: a(href="/") abbruch
+        form(action="/quest/edit/"+_id+"?_method=DELETE", method="POST")
+          button.btn-small.red(type="submit") löschen
   

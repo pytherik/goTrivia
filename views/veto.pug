@@ -2,16 +2,20 @@ extends layouts/mainLayout
 
 block content
   .pre-choice
-    h2#newQuest Zur Frage: #{message}
-    h2#newQuest Bisherige Antwort: #{current}
-  .form-container.multiple 
+  .form-container.veto-container
+    p.veto Zur Frage: 
+    p.veto #{message}
     form.create-form(action="/quest/veto/"+id, method="POST")
       .inputField
-        input(type="text", id="correct", name="correct",  
-              placeholder="Deine richtige Antwort", autocomplete="off")
+        label(for="correct") Antwort: 
+        br
+        br
+        input(type="text", id="correct", name="correct", size="35",  
+              placeholder="Deine richtige Antwort", autocomplete="off", value=current, autofocus)
       .inputField 
-        textarea(id="comment", name="comment",  
+        textarea(id="comment", name="comment",  rows="6", cols="36",
               placeholder="Bitte kommentiere dein Veto.", autocomplete="off")
       .inputField 
         button.btn-small.blue(type="submit") Veto einreichen
+        button.btn-small: a(href="/quest") Abbruch
   

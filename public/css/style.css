@@ -87,11 +87,20 @@
 }
 
 .form-container {
-	background-color: #7D91A3fa;
+	background-color: #7D91A3aa;
 	border-radius: 2rem;
 	padding: 1rem 3rem;
 	text-align: center;
 }
+
+.form-container.veto-container {
+	width: 45%;
+	background-color: #7D91A3aa;
+	border-radius: 2rem;
+	padding: 1rem 3rem;
+	text-align: center;
+}
+
 .register {
 	margin-top: 10vh;
 }
@@ -107,17 +116,48 @@
 	text-align: center;
 }
 
+.textarea {
+	margin: .3rem 0;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
 	font-family: var(--family);
 	background-color: transparent;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	color: var(--mainFont);
 	border: none;
 	outline: none;
 	letter-spacing: var(--spacing);
 	border-bottom: 1px solid var(--mainFont);
+}
+
+label {
+	font-size: 1.5rem;
+	text-align: left;
+}
+
+textarea {
+	background-color: #444;
+	color: #e9dbd5;
+	font-size: 1.5rem;
+	font-family: var(--family);
+	border-radius: 1rem;
+	outline: none;
+	padding: .8rem;
+}
+
+.create {
+	font-size: 1.3rem;
+}
+
+.veto {
+	margin: 0 auto;
+	font-size: 1.5rem;
+	color: #444;
+	width: 90%;
+	text-align: center;
 }
 
 .quest-container {
@@ -142,6 +182,7 @@ input[type="password"] {
 }
 
 .answers {
+	cursor: pointer;
 	margin-top: 2rem;
 	width: 100%;
 	display: flex;
@@ -202,11 +243,13 @@ input[type="password"] {
 }
 
 .lost {
-	border: 2px solid var(--red);
+	/* border: 2px solid var(--red); */
+	background-color: var(--red);
 }
 
 .won {
-	border: 2px solid var(--green);
+	/* border: 2px solid var(--green); */
+	background-color: var(--green);
 }
 
 @keyframes toGreen {

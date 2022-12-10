@@ -3,27 +3,28 @@ extends layouts/mainLayout
 block content
   .pre-choice
     h2#newQuest #{message}
-  .form-container.multiple 
+  .form-container
     form.create-form(action="/quest", method="POST")
       input(type="hidden", name="multiple" value="true")
+      .inputField
+        input(type="text", id="cat", name="category", size="30",  
+              placeholder="Kategorie", required, autofocus)
+      .inputField.textarea 
+        textarea.create(type="text", id="question", name="question",  
+              placeholder="Stelle eine Frage", rows="2", cols="35", required, autocomplete="off")
+      .inputField.textarea 
+        textarea.create(type="text", id="answer", name="answer",  
+              placeholder="Die richtige Antwort", rows="2", cols="35", required, autocomplete="off")
+      .inputField.textarea 
+        textarea.create(type="text", id="wrong1", name="wrong1",  
+              placeholder="1. falsche Antwort", rows="2", cols="35", required, autocomplete="off")
+      .inputField.textarea 
+        textarea.create(type="text", id="wrong2", name="wrong2",  
+              placeholder="2. falsche", rows="2", cols="35", required, autocomplete="off")
+      .inputField.textarea 
+        textarea.create(type="text", id="wrong3", name="wrong3",  
+              placeholder="3. falsche", rows="2", cols="35", required, autocomplete="off")
       .inputField 
-        input(type="text", id="cat", name="category",  
-              placeholder="Kategorie", required)
-      .inputField 
-        input(type="text", id="question", name="question",  
-              placeholder="Stelle eine Frage", required, autocomplete="off")
-      .inputField 
-        input(type="text", id="answer", name="answer",  
-              placeholder="Die richtige Antwort", required, autocomplete="off")
-      .inputField 
-        input(type="text", id="wrong1", name="wrong1",  
-              placeholder="1. falsche Antwort", required, autocomplete="off")
-      .inputField 
-        input(type="text", id="wrong2", name="wrong2",  
-              placeholder="2. falsche", required, autocomplete="off")
-      .inputField 
-        input(type="text", id="wrong3", name="wrong3",  
-              placeholder="3. falsche", required, autocomplete="off")
-      .inputField 
-        button.button(type="submit") hinzu
+        button.btn-small.green(type="submit") Hinzufügen
+        button.btn-small.blue: a(href="/quest") Abbruch
   

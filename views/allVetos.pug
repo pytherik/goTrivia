@@ -7,4 +7,7 @@ block content
   .space 
     each veto in vetos 
       ul 
-        li: a(href="/quest/edit/"+veto.quest_id)= veto.question 
+        li: a(href="/quest/edit/"+veto.quest_id)= veto.question
+  .space
+    button.btn-small.green: a(href="/quest") Play
+   
