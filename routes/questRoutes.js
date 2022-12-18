@@ -101,4 +101,25 @@ router.get('/vetoDetails/:id', async (req, res) => {
   console.log(veto);
   res.render('vetoDetails', veto);
 })
+
+//: Alle Fragen, Kategorien
+
+router.get('/show/:cat', async (req, res) => {
+  if (req.params.cat == 'Alles') {
+    const allQuests = await Quest.find({});
+    console.log(allQuests);
+    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat });
+  } else {
+    const allQuests = await Quest.find({ category: req.params.cat });
+    console.log(allQuests);
+    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat });
+  }
+})
+
+router.get('/showDetails/:id', async (req, res) => {
+  const details = await Quest.findById(req.params.id);
+  console.log(details);
+  res.render('showDetails', details);
+})
+
 module.exports = router;
