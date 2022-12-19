@@ -5,7 +5,10 @@ block content
   .form-container.show-veto
     h2 Alle Fragen in der Kategorie #{cat} 
     each quest in allQuests 
-      p.veto.show: a(href="/quest/showDetails/"+quest._id)= quest.question
+      if user_id == quest.author
+        p.veto.show: a(href="/quest/showDetails/"+quest._id)= quest.question
+      else 
+        p.veto.show= quest.question
     .inputField
       button.btn-small.green: a(href="/quest") Ich will lieber spielen
   .space
