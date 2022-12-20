@@ -13,8 +13,23 @@ block content
 		.form-container.transparent
 			button.button#new-quest(type="submit"): a(href="/quest") Play
 		.form-container.index
-			h1#cats Kategorien:
-			each cat in categories
-				p.veto.cats: a(href="/quest/show/"+cat)= cat
-				br
+			h1.catHeader Anzeigen 			
+			p.veto.cats: a(href="/quest/show/Eigene") Nur meine
+			br
+			p.veto.cats: a(href="/quest/show/Alles") Alle
+			br
+			br
+			h1.catHeader Kategorien:
+			form(action="/quest/cat?_method=PUT", method="POST")
+				select(name="cats" id="cars" multiple)
+					if user.cat == 'Alles'
+						option(value='Alles', selected) Alles 
+					else
+						option(value='Alles') Alles 
+					each cat in categories
+						if user.cat == cat
+							option(value=cat, selected)= cat 
+						else
+							option(value=cat)= cat
+				button select
 	.space

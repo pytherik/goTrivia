@@ -101,4 +101,36 @@ router.get('/vetoDetails/:id', async (req, res) => {
   console.log(veto);
   res.render('vetoDetails', veto);
 })
+
+//: Alle Fragen, Kategorien
+
+router.get('/show/:cat', async (req, res) => {
+  if (req.params.cat == 'Alles') {
+    const allQuests = await Quest.find({});
+    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+  } else if (req.params.cat == 'Eigene') {
+    const allQuests = await Quest.find({ author: req.session.user._id });
+    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+  } else {
+    const allQuests = await Quest.find({ category: req.params.cat });
+    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+  }
+})
+
+router.get('/showDetails/:id', async (req, res) => {
+  const details = await Quest.findById(req.params.id);
+  console.log(details);
+  res.render('showDetails', details);
+})
+
+
+
+
+
+router.put('/cat', async (req, res) => {
+  const userId = req.session.user._id;
+  console.log('req.body:', req.body);
+  // await User.findOneAndUpdate(userId, { cat: req.params.cat });
+})
+
 module.exports = router;

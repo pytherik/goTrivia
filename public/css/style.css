@@ -203,9 +203,14 @@ textarea {
 	text-align: left;
 }
 
-#cats {
-	margin-bottom: 2rem;
+.catHeader {
+	margin-bottom: 2rem;	
 }
+
+.selected {
+	color: red;
+}
+
 .quest-container {
 	width: 50%;
 	text-align: center;
