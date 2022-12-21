@@ -13,23 +13,24 @@ block content
 		.form-container.transparent
 			button.button#new-quest(type="submit"): a(href="/quest") Play
 		.form-container.index
-			h1.catHeader Anzeigen 			
+			h1.catHeader Fragen anzeigen 			
 			p.veto.cats: a(href="/quest/show/Eigene") Nur meine
 			br
-			p.veto.cats: a(href="/quest/show/Alles") Alle
+			p.veto.cats: a(href="/quest/show/Alles") von allen Nutzern
 			br
 			br
 			h1.catHeader Kategorien:
 			form(action="/quest/cat?_method=PUT", method="POST")
-				select(name="cats" id="cars" multiple)
-					if user.cat == 'Alles'
+				select(name="cats" id="cats" multiple)
+					if user.cat.includes('Alles')
 						option(value='Alles', selected) Alles 
 					else
 						option(value='Alles') Alles 
 					each cat in categories
-						if user.cat == cat
-							option(value=cat, selected)= cat 
+						if user.cat.includes(cat)
+							option(class="selected" value=cat, selected)= cat 
 						else
 							option(value=cat)= cat
-				button select
+				.inputField
+					button.btn-small.blue(type="submit") Auswahl speichern
 	.space

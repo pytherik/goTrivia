@@ -4,12 +4,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const Quest = require('../models/questSchema');
 const Veto = require('../models/vetoSchema');
+const User = require('../models/userSchema');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //: Zufallsfrage - multiple.pug
 router.get('/', async (req, res) => {
-  console.log(req.body);
   const user = req.session.user;
   const questions = await Quest.find({}).lean();
   const num = Math.floor(Math.random() * questions.length);
@@ -104,16 +104,30 @@ router.get('/vetoDetails/:id', async (req, res) => {
 
 //: Alle Fragen, Kategorien
 
-router.get('/show/:cat', async (req, res) => {
-  if (req.params.cat == 'Alles') {
-    const allQuests = await Quest.find({});
-    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
-  } else if (req.params.cat == 'Eigene') {
-    const allQuests = await Quest.find({ author: req.session.user._id });
-    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+router.get('/show/:owner', async (req, res) => {
+  const user = await User.findById(req.session.user._id);
+  
+  if (req.params.owner == 'Alles') {
+    if (user.cat.includes('Alles')) {
+      const allQuests = await Quest.find({});
+      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+    } else {      
+      const allQuests = await Quest.find({ category: user.cat });
+      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+      }
   } else {
-    const allQuests = await Quest.find({ category: req.params.cat });
-    res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+    if (user.cat.includes('Alles')) {
+      const allQuests = await Quest.find({ author: req.session.user._id });
+      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+    } else {      
+      const allQuests = await Quest.find({
+        $and: [
+          { author: req.session.user._id },
+          { category: user.cat }
+        ]
+      });
+      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+    } 
   }
 })
 
@@ -123,13 +137,14 @@ router.get('/showDetails/:id', async (req, res) => {
   res.render('showDetails', details);
 })
 
-
-
-
+//: Set Change Categories
 
 router.put('/cat', async (req, res) => {
   const userId = req.session.user._id;
-  console.log('req.body:', req.body);
+  let user = await User.findById(userId);
+  user.cat = req.body.cats;
+  await user.save();
+  console.log('cats:', user.cat);
   // await User.findOneAndUpdate(userId, { cat: req.params.cat });
 })
 
