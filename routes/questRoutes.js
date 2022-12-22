@@ -124,14 +124,14 @@ router.get("/show/:owner", async (req, res) => {
       const allQuests = await Quest.find({});
       res.render("allQuests", {
         allQuests: allQuests,
-        cat: req.params.cat,
+        cat: user.cat,
         user_id: req.session.user._id,
       });
     } else {
       const allQuests = await Quest.find({ category: user.cat });
       res.render("allQuests", {
         allQuests: allQuests,
-        cat: req.params.cat,
+        cat: user.cat,
         user_id: req.session.user._id,
       });
     }
@@ -140,7 +140,7 @@ router.get("/show/:owner", async (req, res) => {
       const allQuests = await Quest.find({ author: req.session.user._id });
       res.render("allQuests", {
         allQuests: allQuests,
-        cat: req.params.cat,
+        cat: user.cat,
         user_id: req.session.user._id,
       });
     } else {
@@ -149,7 +149,7 @@ router.get("/show/:owner", async (req, res) => {
       });
       res.render("allQuests", {
         allQuests: allQuests,
-        cat: req.params.cat,
+        cat: user.cat,
         user_id: req.session.user._id,
       });
     }
@@ -166,8 +166,8 @@ router.get("/showDetails/:id", async (req, res) => {
 
 router.put("/cat", async (req, res) => {
   const userId = req.session.user._id;
-  console.log("req.body:", req.body);
   // await User.findOneAndUpdate(userId, { cat: req.params.cat });
+  console.log("user.cat:", user.cat );
 });
 
 module.exports = router;
