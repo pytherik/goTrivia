@@ -2,14 +2,17 @@ extends layouts/mainLayout
 
 block content
 	.container 
-		h1#greet Hallo #{user.username}
+		h1#greet Prüfe dein wissen in allen Kategorien!
 
 	.index-container
 		.form-container.index 
-			h2 #{message}
+			h1.catHeader Hallo #{user.username}
 			if has_vetos
+				h2 #{message}
 				.inputField
 					button.btn-small.blue: a(href="/quest/vetos") ansehen
+			else 
+				p.smile 🧐
 		.form-container.transparent
 			button.button#new-quest(type="submit"): a(href="/quest") Play
 		.form-container.index

@@ -110,39 +110,27 @@ router.get("/vetos", async (req, res) => {
 
 router.get("/vetoDetails/:id", async (req, res) => {
   const veto = await Veto.findById(req.params.id);
-  console.log(veto);
   res.render("vetoDetails", veto);
 });
 
-//: Alle Fragen, Kategorien
 
+//: Alle Fragen, Kategorien
 router.get("/show/:owner", async (req, res) => {
   const user = await User.findById(req.session.user._id);
+  let payload = { cat: user.cat, user_id: req.session.user._id }
   
   if (req.params.owner == 'Alles') {
     if (user.cat.includes('Alles')) {
       const allQuests = await Quest.find({});
-      res.render('allQuests', {
-        allQuests: allQuests,
-        cat: user.cat,
-        user_id: req.session.user._id
-      });
+      payload.allQuests = allQuests
     } else {      
       const allQuests = await Quest.find({ category: user.cat });
-      res.render('allQuests', {
-        allQuests: allQuests,
-        cat: user.cat,
-        user_id: req.session.user._id
-      });
+      payload.allQuests = allQuests
       }
   } else {
     if (user.cat.includes('Alles')) {
       const allQuests = await Quest.find({ author: req.session.user._id });
-      res.render('allQuests', {
-        allQuests: allQuests,
-        cat: user.cat,
-        user_id: req.session.user._id
-      });
+      payload.allQuests = allQuests
     } else {      
       const allQuests = await Quest.find({
         $and: [
@@ -150,20 +138,21 @@ router.get("/show/:owner", async (req, res) => {
           { category: user.cat }
         ]
       });
-      res.render('allQuests', {
-        allQuests: allQuests,
-        cat: user.cat,
-        user_id: req.session.user._id
-      });
+      payload.allQuests = allQuests
     } 
   }
+  res.render('allQuests', payload);
 })
 
 router.get("/showDetails/:id", async (req, res) => {
   const details = await Quest.findById(req.params.id);
   const userID = req.session.user._id;
-  console.log(details);
-  res.render('showDetails', { details, userID: userID } );
+  let author = await User.findById(details.author);
+
+  author ? author = author.username : author = 'unbekannt';
+
+  console.log(author, details.author);
+  res.render('showDetails', { details, userID: userID , author } );
 })
 
 //: Set Change Categories

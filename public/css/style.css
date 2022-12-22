@@ -59,7 +59,8 @@
 
 #greet,
 #player {
-	color: #2e2e2e;
+	/* color: #2e2e2e; */
+	color: #e9dbe9;
 	letter-spacing: .2rem;
 	font-size: 2rem;
 	font-weight: 800;
@@ -71,6 +72,9 @@
 	margin-top: 5vh;
 }
 
+.smile {
+	font-size: 12rem;
+}
 a {
 	text-decoration: none;
 }

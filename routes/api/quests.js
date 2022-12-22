@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
     res.send(randomQuest);
   } else {
     const questions = await Quest.find({ category: user.cat }).lean();
-    console.log(questions);
     const num = Math.floor(Math.random() * questions.length);
     const randomQuest = questions[num];
     randomQuest.isAuthor = req.session.user._id == randomQuest.author;
