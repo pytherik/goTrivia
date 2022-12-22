@@ -159,43 +159,6 @@ router.get("/show/:owner", async (req, res) => {
   }
 })
 
-  if (req.params.owner == "Alles") {
-    if (user.cat.includes("Alles")) {
-      const allQuests = await Quest.find({});
-      res.render("allQuests", {
-        allQuests: allQuests,
-        cat: req.params.cat,
-        user_id: req.session.user._id,
-      });
-    } else {
-      const allQuests = await Quest.find({ category: user.cat });
-      res.render("allQuests", {
-        allQuests: allQuests,
-        cat: req.params.cat,
-        user_id: req.session.user._id,
-      });
-    }
-  } else {
-    if (user.cat.includes("Alles")) {
-      const allQuests = await Quest.find({ author: req.session.user._id });
-      res.render("allQuests", {
-        allQuests: allQuests,
-        cat: req.params.cat,
-        user_id: req.session.user._id,
-      });
-    } else {
-      const allQuests = await Quest.find({
-        $and: [{ author: req.session.user._id }, { category: user.cat }],
-      });
-      res.render("allQuests", {
-        allQuests: allQuests,
-        cat: req.params.cat,
-        user_id: req.session.user._id,
-      });
-    }
-  }
-});
-
 router.get("/showDetails/:id", async (req, res) => {
   const details = await Quest.findById(req.params.id);
   const userID = req.session.user._id;
