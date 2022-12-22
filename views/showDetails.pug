@@ -6,13 +6,16 @@ block content
 
   .form-container.show-veto
     h2 Frage: 
-    p.veto.show #{question}
+    p.veto.show #{details.question}
     h2 Antwort:
-    p.veto.show #{right_answer}
+    p.veto.show #{details.right_answer}
     h2 Falsche Antworten:
-    p.veto.show #{wrong_answers}
+    p.veto.show #{details.wrong_answers}
     h2 Autor:
-    p.veto.show #{author}
+    p.veto.show #{details.author}
     .inputField
-      button.btn-small.blue: a(href="/quest/edit/"+_id) bearbeiten
+      if details.author == userID
+        button.btn-small.blue: a(href="/quest/edit/"+_id) bearbeiten
+      else 
+        button.btn-small.blue melden
       button.btn-small: a(href="/") zurück

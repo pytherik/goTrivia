@@ -110,15 +110,27 @@ router.get('/show/:owner', async (req, res) => {
   if (req.params.owner == 'Alles') {
     if (user.cat.includes('Alles')) {
       const allQuests = await Quest.find({});
-      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+      res.render('allQuests', {
+        allQuests: allQuests,
+        cat: user.cat,
+        user_id: req.session.user._id
+      });
     } else {      
       const allQuests = await Quest.find({ category: user.cat });
-      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+      res.render('allQuests', {
+        allQuests: allQuests,
+        cat: user.cat,
+        user_id: req.session.user._id
+      });
       }
   } else {
     if (user.cat.includes('Alles')) {
       const allQuests = await Quest.find({ author: req.session.user._id });
-      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+      res.render('allQuests', {
+        allQuests: allQuests,
+        cat: user.cat,
+        user_id: req.session.user._id
+      });
     } else {      
       const allQuests = await Quest.find({
         $and: [
@@ -126,15 +138,20 @@ router.get('/show/:owner', async (req, res) => {
           { category: user.cat }
         ]
       });
-      res.render('allQuests', { allQuests: allQuests, cat: req.params.cat, user_id: req.session.user._id });
+      res.render('allQuests', {
+        allQuests: allQuests,
+        cat: user.cat,
+        user_id: req.session.user._id
+      });
     } 
   }
 })
 
 router.get('/showDetails/:id', async (req, res) => {
   const details = await Quest.findById(req.params.id);
+  const userID = req.session.user._id;
   console.log(details);
-  res.render('showDetails', details);
+  res.render('showDetails', { details, userID: userID } );
 })
 
 //: Set Change Categories
@@ -144,8 +161,6 @@ router.put('/cat', async (req, res) => {
   let user = await User.findById(userId);
   user.cat = req.body.cats;
   await user.save();
-  console.log('cats:', user.cat);
-  // await User.findOneAndUpdate(userId, { cat: req.params.cat });
 })
 
 module.exports = router;
