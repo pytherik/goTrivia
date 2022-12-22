@@ -129,7 +129,7 @@ router.get('/showDetails/:id', async (req, res) => {
 
 router.put('/cat', async (req, res) => {
   const userId = req.session.user._id;
-  console.log('req.body:', req.body);
+  console.log('cats:',  req.body.cats);
   // await User.findOneAndUpdate(userId, { cat: req.params.cat });
 })
 
