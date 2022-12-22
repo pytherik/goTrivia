@@ -69,7 +69,6 @@ app.get('/', middleware.redirectLogin, async(req, res, next) => {
   let message = '';
   let has_vetos = false;
   const categories = await Quest.distinct('category', {});
-  console.log(categories);
   const user = req.session.user;
   const questions = await Quest.find({});
   const vetos = await Veto.find({ quest_author: user._id });

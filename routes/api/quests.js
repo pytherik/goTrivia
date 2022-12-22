@@ -8,12 +8,25 @@ const Quest = require('../../models/questSchema');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 router.get('/', async (req, res) => {
-  const questions = await Quest.find({}).lean();
-  const num = Math.floor(Math.random() * questions.length);
-  const randomQuest = questions[num];
-  randomQuest.isAuthor = req.session.user._id == randomQuest.author;
-  res.send(randomQuest);
+  const userId = req.session.user._id;
+  const user = await User.findById(userId);
+  if (user.cat.includes('Alles')) {
+    const questions = await Quest.find({}).lean();
+    const num = Math.floor(Math.random() * questions.length);
+    const randomQuest = questions[num];
+    //* true false flag isAuthor
+    randomQuest.isAuthor = req.session.user._id == randomQuest.author;
+    res.send(randomQuest);
+  } else {
+    const questions = await Quest.find({ category: user.cat }).lean();
+    console.log(questions);
+    const num = Math.floor(Math.random() * questions.length);
+    const randomQuest = questions[num];
+    randomQuest.isAuthor = req.session.user._id == randomQuest.author;
+    res.send(randomQuest);
+  }
 })
+
 
 router.put('/score/:amount', async (req, res) => {
   const userId = req.session.user._id;

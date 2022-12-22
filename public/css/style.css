@@ -207,8 +207,30 @@ textarea {
 	margin-bottom: 2rem;	
 }
 
+select {
+	font-family: var(--family);
+	color: #444;
+	width: 100%;
+	outline: none;
+	text-decoration: none;
+	border-radius: 1rem;
+	border: none;
+	padding: 1rem;
+	font-size: 1.5rem;
+	background-color:#7D91A3aa;
+	overflow: hidden;
+}
+
+option {
+	background-color: #7D91A3aa;
+}
+
+option:hover {
+	background-color: #999;
+}
+
 .selected {
-	color: red;
+	background-color: #999;
 }
 
 .quest-container {
